@@ -79,3 +79,41 @@ gradle clean --refresh-dependencies
 gradle assembleRelease
 ```
 Результат ищем в папке ```./app/build/outputs/apk/release```
+
+# Запуск
+
+### Создание эмулятора
+
+#### Установите необходимый образ системы
+```sh
+cd C:/Users/User/AppData/Local/Android/Sdk/cmdline-tools/latest/bin
+.\sdkmanager.bat "system-images;android-34;google_apis;x86_64"
+```
+#### Создайте AVD с помощью avdmanager
+```sh
+.\avdmanager.bat create avd -n Pixel_6_API_34 -k "system-images;android-34;google_apis;x86_64" -d pixel
+```
+Где:
+```
+-n Pixel_6_API_34 - имя вашего AVD
+-k - идентификатор пакета системы
+-d pixel - ID устройства (Pixel)
+```
+#### Проверьте список AVD
+```sh
+.\avdmanager.bat list avd
+.\emulator -list-avds
+```
+
+#### Запустите эмулятор
+```sh
+cd C:\Users\User\AppData\Local\Android\Sdk\emulator
+.\emulator -avd Pixel_6_API_34
+```
+
+### Установка APK
+
+```sh
+cd C:\Users\User\AppData\Local\Android\Sdk\platform-tools
+.\adb install "C:\Users\User\repo\theme_mode_changer\app\build\outputs\apk\release\app-release.apk"
+```
